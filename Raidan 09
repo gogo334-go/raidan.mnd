@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كشف حضور موظفي مطعم ريدان للمندي - دبي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .header h1 i {
+            color: #e2e8f0;
+        }
+        
+        .restaurant-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+        }
+        
+        .info-item i {
+            color: #cbd5e0;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .instructions {
+            background-color: #f8fafc;
+            border-right: 5px solid #4a5568;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .instructions h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ul {
+            padding-right: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            background-color: #edf2f7;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 5px solid #718096;
+        }
+        
+        .attendance-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #4a5568;
+            box-shadow: 0 0 0 3px rgba(74, 85, 104, 0.1);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radio-option input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .departure-section {
+            background-color: #f8fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 1px dashed #cbd5e0;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-submit {
+            background-color: #4a5568;
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            background-color: #2d3748;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 55, 72, 0.2);
+        }
+        
+        .btn-reset {
+            background-color: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .btn-reset:hover {
+            background-color: #cbd5e0;
+        }
+        
+        .footer {
+            background-color: #2d3748;
+            color: #cbd5e0;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+        
+        .whatsapp-info {
+            background-color: #25D366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .attendance-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .restaurant-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-circle">
+                    <i class="fas fa-utensils"></i>
+                </div>
+            </div>
+            <h1><i class="fas fa-clipboard-check"></i> كشف حضور موظفي مطعم ريدان للمندي - دبي</h1>
+            <div class="restaurant-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>دبي - الإمارات العربية المتحدة</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span id="current-date">تاريخ اليوم: </span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="current-time">الوقت: </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> تعليمات التسجيل:</h3>
+                <ul>
+                    <li>يجب تعبئة جميع الحقول المطلوبة (*) بشكل صحيح.</li>
+                    <li>يتم تسجيل الحضور عند الوصول إلى العمل.</li>
+                    <li>يتم تسجيل وقت الانصراف عند مغادرة العمل.</li>
+                    <li>بعد إكمال النموذج، يتم إرساله تلقائيًا إلى رقم الواتساب المحدد.</li>
+                    <li>يتم حفظ البيانات أيضًا في صفحة الموقع للرجوع إليها.</li>
+                </ul>
+            </div>
+            
+            <form id="attendanceForm">
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-user-check"></i>
+                        <h2>تسجيل الحضور</h2>
+                    </div>
+                    
+                    <div class="attendance-form">
+                        <div class="form-group">
+                            <label for="employeeName">الاسم الكامل *</label>
+                            <input type="text" id="employeeName" class="form-control" placeholder="أدخل الاسم الكامل للموظف" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="department">القسم *</label>
+                            <select id="department" class="form-control" required>
+                                <option value="">اختر القسم</option>
+                                <option value="المطبخ">المطبخ</option>
+                                <option value="الخدمة">الخدمة</option>
+                                <option value="الكاشير">الكاشير</option>
+                                <option value="الإدارة">الإدارة</option>
+                                <option value="التوصيل">التوصيل</option>
+                                <option value="التنظيف">التنظيف</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="attendanceTime">وقت الحضور *</label>
+                            <input type="time" id="attendanceTime" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>حالة الحضور *</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="present" name="attendanceStatus" value="حاضر" checked>
+                                    <label for="present">حاضر</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="absent" name="attendanceStatus" value="غائب">
+                                    <label for="absent">غائب</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="departure-section">
+                    <div class="section-title">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <h2>تسجيل الانصراف</h2>
+                    </div>
+                    
+                    <div class="attendance-form">
+                        <div class="form-group">
+                            <label for="departureTime">وقت الانصراف *</label>
+                            <input type="time" id="departureTime" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">ملاحظات إضافية (اختياري)</label>
+                            <textarea id="notes" class="form-control" rows="3" placeholder="أي ملاحظات إضافية..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signature">التوقيع (كتابة الاسم للتوقيع) *</label>
+                            <input type="text" id="signature" class="form-control" placeholder="اكتب اسمك للتوقيع" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="whatsapp-info">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>سيتم إرسال النموذج إلى رقم الواتساب: 00971581505066</span>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> إرسال النموذج عبر الواتساب
+                    </button>
+                    <button type="button" id="resetBtn" class="btn btn-reset">
+                        <i class="fas fa-redo"></i> مسح النموذج
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>مطعم ريدان للمندي - دبي &copy; <span id="current-year"></span> | جميع الحقوق محفوظة</p>
+            <p>نظام إدارة الحضور والانصراف | Version 1.0</p>
+        </div>
+    </div>
+
+    <script>
+        // تحديث التاريخ والوقت
+        function updateDateTime() {
+            const now = new Date();
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('ar-AR', dateOptions);
+            const timeString = now.toLocaleTimeString('ar-AR');
+            
+            document.getElementById('current-date').textContent = `تاريخ اليوم: ${dateString}`;
+            document.getElementById('current-time').textContent = `الوقت: ${timeString}`;
+            
+            // تعيين وقت الحضور الحالي إذا كان فارغًا
+            if (!document.getElementById('attendanceTime').value) {
+                const currentHour = now.getHours().toString().padStart(2, '0');
+                const currentMinute = now.getMinutes().toString().padStart(2, '0');
+                document.getElementById('attendanceTime').value = `${currentHour}:${currentMinute}`;
+            }
+            
+            // تعيين وقت الانصراف تلقائياً بعد 8 ساعات من وقت الحضور
+            if (!document.getElementById('departureTime').value && document.getElementById('attendanceTime').value) {
+                const attendanceTime = document.getElementById('attendanceTime').value;
+                const [hours, minutes] = attendanceTime.split(':').map(Number);
+                const departureDate = new Date();
+                departureDate.setHours(hours + 8);
+                departureDate.setMinutes(minutes);
+                
+                const departureHour = departureDate.getHours().toString().padStart(2, '0');
+                const departureMinute = departureDate.getMinutes().toString().padStart(2, '0');
+                document.getElementById('departureTime').value = `${departureHour}:${departureMinute}`;
+            }
+        }
+        
+        // تحديث السنة الحالية
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // تحديث التاريخ والوقت كل ثانية
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // التشغيل الأولي
+        
+        // معالجة إرسال النموذج
+        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // جمع بيانات النموذج
+            const formData = {
+                employeeName: document.getElementById('employeeName').value,
+                department: document.getElementById('department').value,
+                attendanceTime: document.getElementById('attendanceTime').value,
+                attendanceStatus: document.querySelector('input[name="attendanceStatus"]:checked').value,
+                departureTime: document.getElementById('departureTime').value,
+                notes: document.getElementById('notes').value,
+                signature: document.getElementById('signature').value,
+                submissionTime: new Date().toLocaleString('ar-AR')
+            };
+            
+            // إنشاء رسالة الواتساب
+            const whatsappMessage = `
+كشف حضور موظف - مطعم ريدان للمندي دبي
+-----------------------------
+الاسم: ${formData.employeeName}
+القسم: ${formData.department}
+وقت الحضور: ${formData.attendanceTime}
+الحالة: ${formData.attendanceStatus}
+وقت الانصراف: ${formData.departureTime}
+التوقيع: ${formData.signature}
+${formData.notes ? `ملاحظات: ${formData.notes}` : ''}
+-----------------------------
+تم الإرسال في: ${formData.submissionTime}
+            `.trim();
+            
+            // ترميز الرسالة للرابط
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const phoneNumber = "00971581505066";
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // فتح الواتساب
+            window.open(whatsappURL, '_blank');
+            
+            // حفظ البيانات محلياً
+            saveToLocalStorage(formData);
+            
+            // عرض رسالة تأكيد
+            alert("تم إرسال بيانات الحضور بنجاح إلى رقم الواتساب المحدد.\nسيتم فتح نافذة الواتساب لتأكيد الإرسال.");
+            
+            // إعادة تعيين النموذج (اختياري)
+            // document.getElementById('attendanceForm').reset();
+            // updateDateTime(); // إعادة تعيين الوقت بعد المسح
+        });
+        
+        // معالجة زر المسح
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            if (confirm("هل أنت متأكد من مسح جميع البيانات في النموذج؟")) {
+                document.getElementById('attendanceForm').reset();
+                updateDateTime(); // إعادة تعيين الوقت بعد المسح
+            }
+        });
+        
+        // حفظ البيانات في localStorage
+        function saveToLocalStorage(data) {
+            let attendanceRecords = JSON.parse(localStorage.getItem('redanAttendanceRecords')) || [];
+            attendanceRecords.push(data);
+            
+            // حفظ فقط آخر 100 سجل
+            if (attendanceRecords.length > 100) {
+                attendanceRecords = attendanceRecords.slice(-100);
+            }
+            
+            localStorage.setItem('redanAttendanceRecords', JSON.stringify(attendanceRecords));
+            console.log("تم حفظ بيانات الحضور محلياً");
+        }
+    </script>
+</body>
+</html>
