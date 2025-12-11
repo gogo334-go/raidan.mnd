@@ -14,249 +14,410 @@
             font-family: 'Cairo', sans-serif;
         }
         
+        :root {
+            --uae-red: #ff0000;
+            --uae-green: #009739;
+            --uae-white: #ffffff;
+            --uae-black: #000000;
+            --primary: #00732f;
+            --primary-dark: #005222;
+            --secondary: #ffcc00;
+            --light-bg: #f8f9fa;
+        }
+        
         body {
-            background: linear-gradient(135deg, #00732f 0%, #005222 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: #333;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
             position: relative;
             overflow-x: hidden;
         }
         
         /* خلفية علم الإمارات */
-        .uae-bg {
+        .uae-flag-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(to bottom, 
-                #ff0000 0%, #ff0000 33%, 
-                #ffffff 33%, #ffffff 66%, 
-                #009739 66%, #009739 100%);
+                var(--uae-red) 0%, var(--uae-red) 33%, 
+                var(--uae-white) 33%, var(--uae-white) 66%, 
+                var(--uae-green) 66%, var(--uae-green) 100%);
+            opacity: 0.1;
+            z-index: -2;
+        }
+        
+        .uae-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23005222' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
             opacity: 0.15;
             z-index: -1;
         }
         
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
+        }
+        
+        /* شريط علم الإمارات العلوي */
+        .uae-top-bar {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to right, 
+                var(--uae-red) 0%, var(--uae-red) 30%, 
+                var(--uae-green) 30%, var(--uae-green) 100%);
+            border-bottom: 2px solid var(--uae-black);
+            margin-bottom: 20px;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .uae-top-bar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 30%;
+            width: 40%;
+            height: 100%;
+            background-color: var(--uae-white);
         }
         
         header {
             text-align: center;
-            padding: 30px 20px;
+            padding: 25px 15px;
             background-color: rgba(255, 255, 255, 0.98);
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             position: relative;
             overflow: hidden;
-            border: 8px solid #ffcc00;
-        }
-        
-        .uae-flag-header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background: linear-gradient(to bottom, #ff0000 33%, #ffffff 33%, #ffffff 66%, #009739 66%);
-            border-bottom: 2px solid #000;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding-right: 20px;
-            font-weight: bold;
-            color: #000;
+            border: 5px solid var(--secondary);
         }
         
         .logo-area {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-bottom: 15px;
         }
         
         .logo-icon {
-            font-size: 3rem;
-            color: #00732f;
+            font-size: 2.8rem;
+            color: var(--primary);
         }
         
         .company-name {
-            color: #00732f;
-            font-size: 2.5rem;
-            font-weight: 700;
+            color: var(--primary);
+            font-size: 2.2rem;
+            font-weight: 800;
             text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .company-name {
+                font-size: 1.8rem;
+            }
+            .logo-icon {
+                font-size: 2.2rem;
+            }
         }
         
         .subtitle {
             color: #666;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 10px;
         }
         
         .current-date {
-            background-color: #ffcc00;
-            color: #005222;
-            padding: 10px 25px;
+            background: linear-gradient(to right, var(--secondary), #ffd633);
+            color: var(--primary-dark);
+            padding: 10px 20px;
             border-radius: 50px;
             display: inline-block;
             font-weight: bold;
-            font-size: 1.2rem;
-            margin-top: 15px;
+            font-size: 1.1rem;
+            margin-top: 10px;
             box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+            border: 2px solid var(--primary);
         }
         
-        .main-content {
+        @media (max-width: 480px) {
+            .current-date {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+        }
+        
+        /* زر اختيار الموظف */
+        .employee-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .employee-tab {
+            padding: 15px 25px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            border: none;
+            border-radius: 15px;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 3px solid transparent;
+        }
+        
+        .employee-tab:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .employee-tab.active {
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            color: white;
+            border-color: var(--secondary);
+            box-shadow: 0 10px 20px rgba(0, 115, 47, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .employee-tab {
+                padding: 12px 18px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .employee-tab {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* بطاقة الموظف الفردية */
+        .employee-card {
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            border: 5px solid var(--primary);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .employee-card.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .employee-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--secondary);
+        }
+        
+        .employee-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .employee-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            border: 5px solid var(--secondary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .employee-details h2 {
+            color: var(--primary-dark);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .employee-id {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .employee-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .employee-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .employee-details h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* أزرار التحكم بالوقت */
+        .time-controls {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
         }
         
-        @media (max-width: 992px) {
-            .main-content {
+        @media (max-width: 768px) {
+            .time-controls {
                 grid-template-columns: 1fr;
             }
         }
         
-        .attendance-section {
-            background-color: rgba(255, 255, 255, 0.98);
+        .time-control-card {
+            background: linear-gradient(145deg, #f0f0f0, #ffffff);
             border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border: 3px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .time-control-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .time-control-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .time-control-title {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .time-control-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 15px rgba(0, 115, 47, 0.2);
+        }
+        
+        .time-control-btn:hover {
+            background: linear-gradient(to right, var(--primary-dark), #003d1a);
+            transform: scale(1.03);
+        }
+        
+        .time-control-btn.check-out {
+            background: linear-gradient(to right, #dc3545, #c82333);
+        }
+        
+        .time-control-btn.check-out:hover {
+            background: linear-gradient(to right, #c82333, #a71e2a);
+        }
+        
+        .time-display {
+            background-color: var(--light-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 700;
+            color: #444;
+            border: 2px solid #e0e0e0;
+            font-size: 1.3rem;
+        }
+        
+        .time-value {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        /* جدول السجلات */
+        .records-section {
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 5px solid #ffcc00;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            border: 5px solid var(--secondary);
         }
         
         .section-title {
-            color: #00732f;
+            color: var(--primary);
             font-size: 1.8rem;
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 3px solid #ffcc00;
+            border-bottom: 3px solid var(--primary);
             text-align: center;
             position: relative;
         }
         
         .section-title i {
             margin-left: 10px;
-            color: #ffcc00;
+            color: var(--secondary);
         }
         
-        .employee-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .employee-card {
-            background-color: #f8f9fa;
+        .records-table-container {
+            overflow-x: auto;
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border-right: 6px solid #00732f;
-        }
-        
-        .employee-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .employee-name {
-            color: #005222;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .employee-name i {
-            color: #ffcc00;
-        }
-        
-        .time-controls {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-        }
-        
-        @media (max-width: 768px) {
-            .time-controls {
-                flex-direction: column;
-            }
-        }
-        
-        .time-btn {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .check-in-btn {
-            background: linear-gradient(to right, #28a745, #20c997);
-        }
-        
-        .check-in-btn:hover {
-            background: linear-gradient(to right, #218838, #1ca87e);
-            transform: scale(1.03);
-        }
-        
-        .check-out-btn {
-            background: linear-gradient(to right, #dc3545, #fd7e14);
-        }
-        
-        .check-out-btn:hover {
-            background: linear-gradient(to right, #c82333, #e76a00);
-            transform: scale(1.03);
-        }
-        
-        .time-display {
-            background-color: #f1f1f1;
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 15px;
-            text-align: center;
-            font-weight: 600;
-            color: #444;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .time-label {
-            color: #00732f;
-        }
-        
-        .records-section {
-            background-color: rgba(255, 255, 255, 0.98);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 5px solid #00732f;
+            border: 2px solid #e0e0e0;
         }
         
         .records-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            min-width: 600px;
         }
         
         .records-table thead {
-            background: linear-gradient(to right, #00732f, #005222);
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
             color: white;
         }
         
@@ -272,8 +433,12 @@
             transition: background-color 0.2s;
         }
         
-        .records-table tbody tr:hover {
+        .records-table tbody tr:nth-child(even) {
             background-color: #f9f9f9;
+        }
+        
+        .records-table tbody tr:hover {
+            background-color: #f0f8f0;
         }
         
         .records-table td {
@@ -285,63 +450,71 @@
         .status-present {
             color: #28a745;
             font-weight: 700;
+            background-color: rgba(40, 167, 69, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
         }
         
         .status-absent {
             color: #dc3545;
             font-weight: 700;
+            background-color: rgba(220, 53, 69, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* أزرار التحكم العامة */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+        }
+        
+        @media (max-width: 768px) {
+            .action-btn {
+                min-width: 150px;
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
         }
         
         .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
             background: linear-gradient(to right, #25D366, #128C7E);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 20px 35px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 100;
-            transition: all 0.3s ease;
-            text-decoration: none;
         }
         
         .whatsapp-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6);
-        }
-        
-        .whatsapp-btn i {
-            font-size: 2rem;
+            background: linear-gradient(to right, #1da851, #0d7a6f);
+            transform: translateY(-5px);
         }
         
         .clear-btn {
-            display: block;
-            margin: 30px auto 0;
             background: linear-gradient(to right, #6c757d, #495057);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         
         .clear-btn:hover {
             background: linear-gradient(to right, #5a6268, #3d4348);
-            transform: scale(1.05);
+            transform: translateY(-5px);
         }
         
         footer {
@@ -349,31 +522,27 @@
             padding: 25px;
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            color: #005222;
+            color: var(--primary-dark);
             font-weight: 600;
             margin-top: 20px;
-            border-top: 5px solid #ffcc00;
+            border-top: 5px solid var(--secondary);
         }
         
         .footer-logo {
-            color: #00732f;
+            color: var(--primary);
             font-weight: 700;
             font-size: 1.2rem;
         }
         
-        /* تأثيرات للطابع الزمني */
-        .timestamp {
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .uae-emblem {
+            color: var(--uae-red);
+            margin: 0 5px;
         }
         
         /* تخصيص شريط التمرير */
         ::-webkit-scrollbar {
             width: 10px;
+            height: 10px;
         }
         
         ::-webkit-scrollbar-track {
@@ -382,122 +551,237 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: #00732f;
+            background: var(--primary);
             border-radius: 10px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: #005222;
+            background: var(--primary-dark);
+        }
+        
+        /* رسائل التنبيه */
+        .alert-message {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+        }
+        
+        @keyframes slideIn {
+            from { top: -100px; opacity: 0; }
+            to { top: 30px; opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        
+        .alert-success {
+            background: linear-gradient(to right, #28a745, #20c997);
+        }
+        
+        .alert-warning {
+            background: linear-gradient(to right, #ffc107, #fd7e14);
+        }
+        
+        .alert-error {
+            background: linear-gradient(to right, #dc3545, #c82333);
         }
     </style>
 </head>
 <body>
     <!-- خلفية علم الإمارات -->
-    <div class="uae-bg"></div>
+    <div class="uae-flag-background"></div>
+    <div class="uae-pattern"></div>
     
-    <!-- زر إرسال إلى واتساب -->
-    <a id="whatsappBtn" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-        <span>إرسال سجل الحضور عبر واتساب</span>
-    </a>
+    <!-- شريط علم الإمارات العلوي -->
+    <div class="uae-top-bar"></div>
     
     <div class="container">
         <header>
-            <div class="uae-flag-header">
-                <i class="fas fa-flag"></i> علم الإمارات العربية المتحدة
-            </div>
-            
             <div class="logo-area">
                 <i class="fas fa-utensils logo-icon"></i>
                 <h1 class="company-name">مطعم ريدان للمندي</h1>
             </div>
             
-            <p class="subtitle">نظام إلكتروني متكامل لتسجيل حضور وانصراف الموظفين</p>
+            <p class="subtitle">نظام التحضير الإلكتروني الفردي للموظفين</p>
             
             <div class="current-date" id="currentDate"></div>
         </header>
         
-        <div class="main-content">
-            <!-- قسم تسجيل الحضور والانصراف -->
-            <section class="attendance-section">
-                <h2 class="section-title"><i class="fas fa-user-clock"></i> تسجيل حضور وانصراف الموظفين</h2>
-                
-                <div class="employee-list">
-                    <!-- موظفة 1 -->
-                    <div class="employee-card">
-                        <h3 class="employee-name">
-                            <i class="fas fa-user-circle"></i> سهام الكعبي
-                        </h3>
-                        <div class="time-controls">
-                            <button class="time-btn check-in-btn" onclick="checkIn('siham')">
-                                <i class="fas fa-sign-in-alt"></i> تسجيل حضور
-                            </button>
-                            <button class="time-btn check-out-btn" onclick="checkOut('siham')">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل انصراف
-                            </button>
-                        </div>
-                        <div class="time-display">
-                            <span class="time-label">حضور:</span>
-                            <span id="sihamCheckIn">--:--</span>
-                        </div>
-                        <div class="time-display">
-                            <span class="time-label">انصراف:</span>
-                            <span id="sihamCheckOut">--:--</span>
-                        </div>
+        <!-- أزرار اختيار الموظف -->
+        <div class="employee-selector">
+            <button class="employee-tab active" data-employee="siham">
+                <i class="fas fa-user"></i> سهام الكعبي
+            </button>
+            <button class="employee-tab" data-employee="maryam">
+                <i class="fas fa-user"></i> مريم الكعبي
+            </button>
+            <button class="employee-tab" data-employee="fatima">
+                <i class="fas fa-user"></i> فاطمة الكعبي
+            </button>
+        </div>
+        
+        <!-- بطاقة سهام الكعبي -->
+        <div class="employee-card active" id="sihamCard">
+            <div class="employee-header">
+                <div class="employee-info">
+                    <div class="employee-avatar">
+                        <i class="fas fa-user-tie"></i>
                     </div>
-                    
-                    <!-- موظفة 2 -->
-                    <div class="employee-card">
-                        <h3 class="employee-name">
-                            <i class="fas fa-user-circle"></i> مريم الكعبي
-                        </h3>
-                        <div class="time-controls">
-                            <button class="time-btn check-in-btn" onclick="checkIn('maryam')">
-                                <i class="fas fa-sign-in-alt"></i> تسجيل حضور
-                            </button>
-                            <button class="time-btn check-out-btn" onclick="checkOut('maryam')">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل انصراف
-                            </button>
-                        </div>
-                        <div class="time-display">
-                            <span class="time-label">حضور:</span>
-                            <span id="maryamCheckIn">--:--</span>
-                        </div>
-                        <div class="time-display">
-                            <span class="time-label">انصراف:</span>
-                            <span id="maryamCheckOut">--:--</span>
-                        </div>
-                    </div>
-                    
-                    <!-- موظفة 3 -->
-                    <div class="employee-card">
-                        <h3 class="employee-name">
-                            <i class="fas fa-user-circle"></i> فاطمة الكعبي
-                        </h3>
-                        <div class="time-controls">
-                            <button class="time-btn check-in-btn" onclick="checkIn('fatima')">
-                                <i class="fas fa-sign-in-alt"></i> تسجيل حضور
-                            </button>
-                            <button class="time-btn check-out-btn" onclick="checkOut('fatima')">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل انصراف
-                            </button>
-                        </div>
-                        <div class="time-display">
-                            <span class="time-label">حضور:</span>
-                            <span id="fatimaCheckIn">--:--</span>
-                        </div>
-                        <div class="time-display">
-                            <span class="time-label">انصراف:</span>
-                            <span id="fatimaCheckOut">--:--</span>
-                        </div>
+                    <div class="employee-details">
+                        <h2>سهام الكعبي</h2>
+                        <p class="employee-id">رقم الموظف: RYD-001</p>
                     </div>
                 </div>
-            </section>
+                <div class="employee-status">
+                    <span class="current-date" id="sihamStatus">حالة الحضور: غير مسجل</span>
+                </div>
+            </div>
             
-            <!-- قسم سجلات الحضور -->
-            <section class="records-section">
-                <h2 class="section-title"><i class="fas fa-history"></i> سجلات الحضور اليومية</h2>
+            <div class="time-controls">
+                <div class="time-control-card">
+                    <div class="time-control-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <h3 class="time-control-title">تسجيل الحضور</h3>
+                    <button class="time-control-btn" onclick="checkIn('siham')">
+                        <i class="fas fa-clock"></i> تسجيل حضور
+                    </button>
+                    <div class="time-display">
+                        <span>وقت الحضور: </span>
+                        <span class="time-value" id="sihamCheckIn">--:--</span>
+                    </div>
+                </div>
                 
+                <div class="time-control-card">
+                    <div class="time-control-icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <h3 class="time-control-title">تسجيل الانصراف</h3>
+                    <button class="time-control-btn check-out" onclick="checkOut('siham')">
+                        <i class="fas fa-clock"></i> تسجيل انصراف
+                    </button>
+                    <div class="time-display">
+                        <span>وقت الانصراف: </span>
+                        <span class="time-value" id="sihamCheckOut">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- بطاقة مريم الكعبي -->
+        <div class="employee-card" id="maryamCard">
+            <div class="employee-header">
+                <div class="employee-info">
+                    <div class="employee-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="employee-details">
+                        <h2>مريم الكعبي</h2>
+                        <p class="employee-id">رقم الموظف: RYD-002</p>
+                    </div>
+                </div>
+                <div class="employee-status">
+                    <span class="current-date" id="maryamStatus">حالة الحضور: غير مسجل</span>
+                </div>
+            </div>
+            
+            <div class="time-controls">
+                <div class="time-control-card">
+                    <div class="time-control-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <h3 class="time-control-title">تسجيل الحضور</h3>
+                    <button class="time-control-btn" onclick="checkIn('maryam')">
+                        <i class="fas fa-clock"></i> تسجيل حضور
+                    </button>
+                    <div class="time-display">
+                        <span>وقت الحضور: </span>
+                        <span class="time-value" id="maryamCheckIn">--:--</span>
+                    </div>
+                </div>
+                
+                <div class="time-control-card">
+                    <div class="time-control-icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <h3 class="time-control-title">تسجيل الانصراف</h3>
+                    <button class="time-control-btn check-out" onclick="checkOut('maryam')">
+                        <i class="fas fa-clock"></i> تسجيل انصراف
+                    </button>
+                    <div class="time-display">
+                        <span>وقت الانصراف: </span>
+                        <span class="time-value" id="maryamCheckOut">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- بطاقة فاطمة الكعبي -->
+        <div class="employee-card" id="fatimaCard">
+            <div class="employee-header">
+                <div class="employee-info">
+                    <div class="employee-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="employee-details">
+                        <h2>فاطمة الكعبي</h2>
+                        <p class="employee-id">رقم الموظف: RYD-003</p>
+                    </div>
+                </div>
+                <div class="employee-status">
+                    <span class="current-date" id="fatimaStatus">حالة الحضور: غير مسجل</span>
+                </div>
+            </div>
+            
+            <div class="time-controls">
+                <div class="time-control-card">
+                    <div class="time-control-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <h3 class="time-control-title">تسجيل الحضور</h3>
+                    <button class="time-control-btn" onclick="checkIn('fatima')">
+                        <i class="fas fa-clock"></i> تسجيل حضور
+                    </button>
+                    <div class="time-display">
+                        <span>وقت الحضور: </span>
+                        <span class="time-value" id="fatimaCheckIn">--:--</span>
+                    </div>
+                </div>
+                
+                <div class="time-control-card">
+                    <div class="time-control-icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <h3 class="time-control-title">تسجيل الانصراف</h3>
+                    <button class="time-control-btn check-out" onclick="checkOut('fatima')">
+                        <i class="fas fa-clock"></i> تسجيل انصراف
+                    </button>
+                    <div class="time-display">
+                        <span>وقت الانصراف: </span>
+                        <span class="time-value" id="fatimaCheckOut">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- جدول السجلات -->
+        <section class="records-section">
+            <h2 class="section-title"><i class="fas fa-history"></i> سجلات الحضور اليومية</h2>
+            
+            <div class="records-table-container">
                 <table class="records-table">
                     <thead>
                         <tr>
@@ -507,22 +791,29 @@
                             <th>وقت الحضور</th>
                             <th>وقت الانصراف</th>
                             <th>المدة</th>
+                            <th>التاريخ</th>
                         </tr>
                     </thead>
                     <tbody id="attendanceTableBody">
                         <!-- سيتم ملء الجدول تلقائيا عبر الجافاسكربت -->
                     </tbody>
                 </table>
-                
-                <button class="clear-btn" onclick="clearAllRecords()">
-                    <i class="fas fa-trash-alt"></i> مسح جميع السجلات
-                </button>
-            </section>
+            </div>
+        </section>
+        
+        <!-- أزرار التحكم العامة -->
+        <div class="action-buttons">
+            <button class="action-btn whatsapp-btn" id="whatsappBtn">
+                <i class="fab fa-whatsapp"></i> إرسال إلى واتساب
+            </button>
+            <button class="action-btn clear-btn" onclick="clearAllRecords()">
+                <i class="fas fa-trash-alt"></i> مسح جميع السجلات
+            </button>
         </div>
         
         <footer>
             <p>جميع الحقوق محفوظة © <span class="footer-logo">مطعم ريدان للمندي</span> 2023</p>
-            <p>نظام إدارة وتحضير الموظفين الإلكتروني | الإمارات العربية المتحدة</p>
+            <p>نظام إدارة وتحضير الموظفين الإلكتروني <span class="uae-emblem">❤</span> الإمارات العربية المتحدة</p>
         </footer>
     </div>
 
@@ -547,32 +838,51 @@
         setInterval(updateDateTime, 1000);
         updateDateTime();
         
-        // تخزين بيانات الموظفين
+        // بيانات الموظفين
         let employees = {
             siham: {
                 name: 'سهام الكعبي',
                 checkIn: null,
-                checkOut: null
+                checkOut: null,
+                records: []
             },
             maryam: {
                 name: 'مريم الكعبي',
                 checkIn: null,
-                checkOut: null
+                checkOut: null,
+                records: []
             },
             fatima: {
                 name: 'فاطمة الكعبي',
                 checkIn: null,
-                checkOut: null
+                checkOut: null,
+                records: []
             }
         };
         
+        // تحويل بين معرف الموظف والاسم العربي
+        function getEmployeeArabicName(id) {
+            const names = {
+                siham: 'سهام الكعبي',
+                maryam: 'مريم الكعبي',
+                fatima: 'فاطمة الكعبي'
+            };
+            return names[id] || id;
+        }
+        
         // تنسيق الوقت
         function formatTime(date) {
+            if (!date) return '--:--';
             return date.toLocaleTimeString('ar-EG', { 
                 hour: '2-digit', 
                 minute: '2-digit',
                 hour12: true 
             });
+        }
+        
+        // تنسيق التاريخ
+        function formatDate(date) {
+            return date.toLocaleDateString('ar-EG');
         }
         
         // حساب المدة بين وقتين
@@ -586,6 +896,30 @@
             return `${diffHrs} ساعة ${diffMins} دقيقة`;
         }
         
+        // تبديل بين بطاقات الموظفين
+        document.querySelectorAll('.employee-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const employeeId = this.getAttribute('data-employee');
+                
+                // تحديث الأزرار النشطة
+                document.querySelectorAll('.employee-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // إخفاء جميع البطاقات
+                document.querySelectorAll('.employee-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                
+                // إظهار البطاقة المحددة
+                document.getElementById(`${employeeId}Card`).classList.add('active');
+                
+                // تحديث حالة الحضور في البطاقة
+                updateEmployeeStatus(employeeId);
+            });
+        });
+        
         // تسجيل الحضور
         function checkIn(employeeId) {
             const now = new Date();
@@ -595,32 +929,63 @@
             document.getElementById(`${employeeId}CheckIn`).textContent = formatTime(now);
             document.getElementById(`${employeeId}CheckIn`).classList.add('timestamp');
             
+            // تحديث حالة الحضور
+            updateEmployeeStatus(employeeId);
+            
             // تحديث الجدول
             updateAttendanceTable();
             
             // إظهار رسالة تأكيد
-            showNotification(`تم تسجيل حضور ${employees[employeeId].name} بنجاح`);
+            showAlert(`تم تسجيل حضور ${getEmployeeArabicName(employeeId)} بنجاح`, 'success');
         }
         
         // تسجيل الانصراف
         function checkOut(employeeId) {
             if (!employees[employeeId].checkIn) {
-                alert('يجب تسجيل الحضور أولا قبل تسجيل الانصراف');
+                showAlert('يجب تسجيل الحضور أولا قبل تسجيل الانصراف', 'warning');
                 return;
             }
             
             const now = new Date();
             employees[employeeId].checkOut = now;
             
+            // إضافة سجل جديد
+            employees[employeeId].records.push({
+                checkIn: employees[employeeId].checkIn,
+                checkOut: now,
+                date: new Date()
+            });
+            
             // تحديث العرض
             document.getElementById(`${employeeId}CheckOut`).textContent = formatTime(now);
             document.getElementById(`${employeeId}CheckOut`).classList.add('timestamp');
             
+            // تحديث حالة الحضور
+            updateEmployeeStatus(employeeId);
+            
             // تحديث الجدول
             updateAttendanceTable();
             
+            // إعادة تعيين الحضور والانصراف للجلسة الحالية
+            employees[employeeId].checkIn = null;
+            employees[employeeId].checkOut = null;
+            
             // إظهار رسالة تأكيد
-            showNotification(`تم تسجيل انصراف ${employees[employeeId].name} بنجاح`);
+            showAlert(`تم تسجيل انصراف ${getEmployeeArabicName(employeeId)} بنجاح`, 'success');
+        }
+        
+        // تحديث حالة الحضور للموظف
+        function updateEmployeeStatus(employeeId) {
+            const employee = employees[employeeId];
+            let status = 'حالة الحضور: غير مسجل';
+            
+            if (employee.checkIn && employee.checkOut) {
+                status = 'حالة الحضور: مغادر';
+            } else if (employee.checkIn) {
+                status = 'حالة الحضور: حاضر';
+            }
+            
+            document.getElementById(`${employeeId}Status`).textContent = status;
         }
         
         // تحديث جدول الحضور
@@ -628,113 +993,167 @@
             const tableBody = document.getElementById('attendanceTableBody');
             tableBody.innerHTML = '';
             
-            let index = 1;
+            let allRecords = [];
+            
+            // جمع جميع السجلات من جميع الموظفين
             for (const employeeId in employees) {
                 const employee = employees[employeeId];
+                
+                // إضافة سجل الجلسة الحالية إذا كان موجوداً
+                if (employee.checkIn) {
+                    allRecords.push({
+                        employeeId: employeeId,
+                        employeeName: employee.name,
+                        checkIn: employee.checkIn,
+                        checkOut: employee.checkOut,
+                        date: new Date(),
+                        isCurrent: true
+                    });
+                }
+                
+                // إضافة جميع السجلات السابقة
+                employee.records.forEach(record => {
+                    allRecords.push({
+                        employeeId: employeeId,
+                        employeeName: employee.name,
+                        checkIn: record.checkIn,
+                        checkOut: record.checkOut,
+                        date: record.date,
+                        isCurrent: false
+                    });
+                });
+            }
+            
+            // ترتيب السجلات حسب التاريخ (الأحدث أولاً)
+            allRecords.sort((a, b) => b.date - a.date);
+            
+            // إضافة السجلات إلى الجدول
+            allRecords.forEach((record, index) => {
                 const row = document.createElement('tr');
                 
                 // حالة الحضور
                 let status = 'غائب';
                 let statusClass = 'status-absent';
                 
-                if (employee.checkIn && employee.checkOut) {
+                if (record.checkIn && record.checkOut) {
                     status = 'حاضر ومغادر';
                     statusClass = 'status-present';
-                } else if (employee.checkIn) {
+                } else if (record.checkIn) {
                     status = 'حاضر';
                     statusClass = 'status-present';
                 }
                 
+                // إذا كان السجل هو الجلسة الحالية
+                if (record.isCurrent) {
+                    row.style.backgroundColor = '#e8f5e9';
+                }
+                
                 row.innerHTML = `
-                    <td>${index}</td>
-                    <td>${employee.name}</td>
-                    <td class="${statusClass}">${status}</td>
-                    <td>${employee.checkIn ? formatTime(employee.checkIn) : '--:--'}</td>
-                    <td>${employee.checkOut ? formatTime(employee.checkOut) : '--:--'}</td>
-                    <td>${calculateDuration(employee.checkIn, employee.checkOut)}</td>
+                    <td>${index + 1}</td>
+                    <td>${record.employeeName}</td>
+                    <td><span class="${statusClass}">${status}</span></td>
+                    <td>${formatTime(record.checkIn)}</td>
+                    <td>${formatTime(record.checkOut)}</td>
+                    <td>${calculateDuration(record.checkIn, record.checkOut)}</td>
+                    <td>${formatDate(record.date)}</td>
                 `;
                 
                 tableBody.appendChild(row);
-                index++;
+            });
+            
+            // إذا لم تكن هناك سجلات
+            if (allRecords.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="7" style="text-align: center; padding: 40px; color: #666;">
+                        <i class="fas fa-clipboard-list" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                        لا توجد سجلات حضور حتى الآن
+                    </td>
+                `;
+                tableBody.appendChild(row);
             }
         }
         
         // مسح جميع السجلات
         function clearAllRecords() {
-            if (confirm('هل أنت متأكد من رغبتك في مسح جميع سجلات الحضور لهذا اليوم؟')) {
+            if (confirm('هل أنت متأكد من رغبتك في مسح جميع سجلات الحضور؟ سيتم مسح جميع البيانات ولا يمكن استعادتها.')) {
                 for (const employeeId in employees) {
                     employees[employeeId].checkIn = null;
                     employees[employeeId].checkOut = null;
+                    employees[employeeId].records = [];
                     
                     // إعادة تعيين العرض
                     document.getElementById(`${employeeId}CheckIn`).textContent = '--:--';
                     document.getElementById(`${employeeId}CheckOut`).textContent = '--:--';
+                    document.getElementById(`${employeeId}Status`).textContent = 'حالة الحضور: غير مسجل';
                 }
                 
                 updateAttendanceTable();
-                showNotification('تم مسح جميع السجلات بنجاح');
+                showAlert('تم مسح جميع السجلات بنجاح', 'success');
             }
         }
         
-        // إظهار إشعار
-        function showNotification(message) {
-            // إنشاء عنصر الإشعار
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: linear-gradient(to right, #00732f, #005222);
-                color: white;
-                padding: 15px 30px;
-                border-radius: 50px;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-                z-index: 1000;
-                font-weight: bold;
-                animation: slideDown 0.3s ease;
-            `;
+        // إظهار رسالة تنبيه
+        function showAlert(message, type) {
+            // إزالة أي رسائل سابقة
+            const existingAlert = document.querySelector('.alert-message');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
             
-            notification.textContent = message;
-            document.body.appendChild(notification);
+            // إنشاء رسالة جديدة
+            const alert = document.createElement('div');
+            alert.className = `alert-message alert-${type}`;
             
-            // إزالة الإشعار بعد 3 ثوانٍ
+            // إضافة الأيقونة المناسبة
+            let icon = 'info-circle';
+            if (type === 'success') icon = 'check-circle';
+            if (type === 'warning') icon = 'exclamation-triangle';
+            if (type === 'error') icon = 'times-circle';
+            
+            alert.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+            
+            document.body.appendChild(alert);
+            
+            // إزالة الرسالة بعد 3 ثوانٍ
             setTimeout(() => {
-                notification.style.animation = 'slideUp 0.3s ease';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
+                if (alert.parentNode) {
+                    alert.remove();
+                }
             }, 3000);
         }
-        
-        // إضافة أنيميشن للإشعارات
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideDown {
-                from { top: -100px; opacity: 0; }
-                to { top: 20px; opacity: 1; }
-            }
-            @keyframes slideUp {
-                from { top: 20px; opacity: 1; }
-                to { top: -100px; opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
         
         // إعداد زر الواتساب
         document.getElementById('whatsappBtn').addEventListener('click', function() {
             let message = `*تقرير حضور موظفي مطعم ريدان للمندي*\n`;
-            message += `التاريخ: ${new Date().toLocaleDateString('ar-EG')}\n\n`;
+            message += `التاريخ: ${new Date().toLocaleDateString('ar-EG')}\n`;
+            message += `الوقت: ${new Date().toLocaleTimeString('ar-EG')}\n\n`;
+            
+            message += `*تفاصيل الحضور:*\n`;
             
             for (const employeeId in employees) {
                 const employee = employees[employeeId];
-                message += `*${employee.name}:*\n`;
-                message += `- الحضور: ${employee.checkIn ? formatTime(employee.checkIn) : 'لم يسجل'}\n`;
-                message += `- الانصراف: ${employee.checkOut ? formatTime(employee.checkOut) : 'لم يسجل'}\n`;
-                message += `- المدة: ${calculateDuration(employee.checkIn, employee.checkOut)}\n\n`;
+                message += `\n*${employee.name}:*\n`;
+                
+                // حالة الجلسة الحالية
+                if (employee.checkIn) {
+                    message += `- الحضور الحالي: ${formatTime(employee.checkIn)}\n`;
+                    message += `- الانصراف الحالي: ${employee.checkOut ? formatTime(employee.checkOut) : 'لم يسجل'}\n`;
+                }
+                
+                // عدد السجلات السابقة
+                if (employee.records.length > 0) {
+                    message += `- عدد مرات الحضور السابقة: ${employee.records.length}\n`;
+                    
+                    // آخر مرة حضر فيها
+                    const lastRecord = employee.records[employee.records.length - 1];
+                    message += `- آخر حضور: ${formatDate(lastRecord.date)} - ${formatTime(lastRecord.checkIn)}\n`;
+                } else {
+                    message += `- لا توجد سجلات حضور سابقة\n`;
+                }
             }
             
-            message += `---\nتم إرسال هذا التقرير تلقائياً من نظام تحضير الموظفين`;
+            message += `\n---\nتم إرسال هذا التقرير تلقائياً من نظام تحضير الموظفين`;
             
             const phoneNumber = '+971581505066';
             const encodedMessage = encodeURIComponent(message);
@@ -742,10 +1161,20 @@
             
             // فتح الواتساب في نافذة جديدة
             window.open(whatsappUrl, '_blank');
+            
+            showAlert('يتم فتح تطبيق واتساب لإرسال التقرير', 'success');
         });
         
         // تحديث الجدول عند التحميل
         updateAttendanceTable();
+        
+        // تحديث حالة الحضور للموظف النشط
+        document.querySelectorAll('.employee-tab').forEach(tab => {
+            if (tab.classList.contains('active')) {
+                const employeeId = tab.getAttribute('data-employee');
+                updateEmployeeStatus(employeeId);
+            }
+        });
     </script>
 </body>
 </html>
