@@ -157,7 +157,32 @@
             }
         }
         
-        /* زر اختيار الموظف */
+        /* قسم الحضور والانصراف */
+        .attendance-section {
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            border: 5px solid var(--primary);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title i {
+            margin-left: 10px;
+            color: var(--secondary);
+        }
+        
+        /* أزرار اختيار الموظف */
         .employee-selector {
             display: flex;
             justify-content: center;
@@ -272,6 +297,16 @@
             font-size: 1.1rem;
         }
         
+        .employee-status {
+            background: linear-gradient(to right, var(--secondary), #ffd633);
+            color: var(--primary-dark);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid var(--primary);
+        }
+        
         @media (max-width: 768px) {
             .employee-header {
                 flex-direction: column;
@@ -286,12 +321,17 @@
             .employee-details h2 {
                 font-size: 1.8rem;
             }
+            
+            .employee-status {
+                font-size: 1rem;
+                padding: 8px 20px;
+            }
         }
         
         /* أزرار التحكم بالوقت */
         .time-controls {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin-bottom: 30px;
         }
@@ -346,6 +386,7 @@
             justify-content: center;
             gap: 10px;
             box-shadow: 0 8px 15px rgba(0, 115, 47, 0.2);
+            margin-bottom: 15px;
         }
         
         .time-control-btn:hover {
@@ -361,6 +402,29 @@
             background: linear-gradient(to right, #c82333, #a71e2a);
         }
         
+        .send-btn {
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .send-btn:hover {
+            background: linear-gradient(to right, #1da851, #0d7a6f);
+            transform: scale(1.03);
+        }
+        
         .time-display {
             background-color: var(--light-bg);
             border-radius: 15px;
@@ -371,6 +435,7 @@
             color: #444;
             border: 2px solid #e0e0e0;
             font-size: 1.3rem;
+            margin-bottom: 15px;
         }
         
         .time-value {
@@ -387,21 +452,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             margin-bottom: 30px;
             border: 5px solid var(--secondary);
-        }
-        
-        .section-title {
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid var(--primary);
-            text-align: center;
-            position: relative;
-        }
-        
-        .section-title i {
-            margin-left: 10px;
-            color: var(--secondary);
         }
         
         .records-table-container {
@@ -598,6 +648,21 @@
         .alert-error {
             background: linear-gradient(to right, #dc3545, #c82333);
         }
+        
+        .alert-info {
+            background: linear-gradient(to right, #17a2b8, #138496);
+        }
+        
+        /* تأثيرات للطابع الزمني */
+        .timestamp {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -620,162 +685,191 @@
             <div class="current-date" id="currentDate"></div>
         </header>
         
-        <!-- أزرار اختيار الموظف -->
-        <div class="employee-selector">
-            <button class="employee-tab active" data-employee="siham">
-                <i class="fas fa-user"></i> سهام الكعبي
-            </button>
-            <button class="employee-tab" data-employee="maryam">
-                <i class="fas fa-user"></i> مريم الكعبي
-            </button>
-            <button class="employee-tab" data-employee="fatima">
-                <i class="fas fa-user"></i> فاطمة الكعبي
-            </button>
-        </div>
-        
-        <!-- بطاقة سهام الكعبي -->
-        <div class="employee-card active" id="sihamCard">
-            <div class="employee-header">
-                <div class="employee-info">
-                    <div class="employee-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="employee-details">
-                        <h2>سهام الكعبي</h2>
-                        <p class="employee-id">رقم الموظف: RYD-001</p>
-                    </div>
-                </div>
-                <div class="employee-status">
-                    <span class="current-date" id="sihamStatus">حالة الحضور: غير مسجل</span>
-                </div>
+        <!-- قسم الحضور والانصراف -->
+        <section class="attendance-section">
+            <h2 class="section-title"><i class="fas fa-user-clock"></i> تسجيل حضور وانصراف الموظفين</h2>
+            
+            <!-- أزرار اختيار الموظف -->
+            <div class="employee-selector">
+                <button class="employee-tab active" data-employee="siham">
+                    <i class="fas fa-user"></i> سهام الكعبي
+                </button>
+                <button class="employee-tab" data-employee="maryam">
+                    <i class="fas fa-user"></i> مريم الكعبي
+                </button>
+                <button class="employee-tab" data-employee="fatima">
+                    <i class="fas fa-user"></i> فاطمة الكعبي
+                </button>
             </div>
             
-            <div class="time-controls">
-                <div class="time-control-card">
-                    <div class="time-control-icon">
-                        <i class="fas fa-sign-in-alt"></i>
+            <!-- بطاقة سهام الكعبي -->
+            <div class="employee-card active" id="sihamCard">
+                <div class="employee-header">
+                    <div class="employee-info">
+                        <div class="employee-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="employee-details">
+                            <h2>سهام الكعبي</h2>
+                            <p class="employee-id">رقم الموظف: RYD-001</p>
+                        </div>
                     </div>
-                    <h3 class="time-control-title">تسجيل الحضور</h3>
-                    <button class="time-control-btn" onclick="checkIn('siham')">
-                        <i class="fas fa-clock"></i> تسجيل حضور
-                    </button>
-                    <div class="time-display">
-                        <span>وقت الحضور: </span>
-                        <span class="time-value" id="sihamCheckIn">--:--</span>
+                    <div class="employee-status" id="sihamStatus">
+                        حالة الحضور: غير مسجل
                     </div>
                 </div>
                 
-                <div class="time-control-card">
-                    <div class="time-control-icon">
-                        <i class="fas fa-sign-out-alt"></i>
+                <div class="time-controls">
+                    <!-- تسجيل الحضور -->
+                    <div class="time-control-card">
+                        <div class="time-control-icon">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <h3 class="time-control-title">تسجيل الحضور</h3>
+                        <button class="time-control-btn" onclick="checkIn('siham')">
+                            <i class="fas fa-clock"></i> تسجيل حضور
+                        </button>
+                        <button class="send-btn" onclick="sendCheckIn('siham')">
+                            <i class="fab fa-whatsapp"></i> إرسال الحضور للواتساب
+                        </button>
+                        <div class="time-display">
+                            <span>وقت الحضور: </span>
+                            <span class="time-value" id="sihamCheckIn">--:--</span>
+                        </div>
                     </div>
-                    <h3 class="time-control-title">تسجيل الانصراف</h3>
-                    <button class="time-control-btn check-out" onclick="checkOut('siham')">
-                        <i class="fas fa-clock"></i> تسجيل انصراف
-                    </button>
-                    <div class="time-display">
-                        <span>وقت الانصراف: </span>
-                        <span class="time-value" id="sihamCheckOut">--:--</span>
+                    
+                    <!-- تسجيل الانصراف -->
+                    <div class="time-control-card">
+                        <div class="time-control-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <h3 class="time-control-title">تسجيل الانصراف</h3>
+                        <button class="time-control-btn check-out" onclick="checkOut('siham')">
+                            <i class="fas fa-clock"></i> تسجيل انصراف
+                        </button>
+                        <button class="send-btn" onclick="sendCheckOut('siham')">
+                            <i class="fab fa-whatsapp"></i> إرسال الانصراف للواتساب
+                        </button>
+                        <div class="time-display">
+                            <span>وقت الانصراف: </span>
+                            <span class="time-value" id="sihamCheckOut">--:--</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- بطاقة مريم الكعبي -->
-        <div class="employee-card" id="maryamCard">
-            <div class="employee-header">
-                <div class="employee-info">
-                    <div class="employee-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="employee-details">
-                        <h2>مريم الكعبي</h2>
-                        <p class="employee-id">رقم الموظف: RYD-002</p>
-                    </div>
-                </div>
-                <div class="employee-status">
-                    <span class="current-date" id="maryamStatus">حالة الحضور: غير مسجل</span>
                 </div>
             </div>
             
-            <div class="time-controls">
-                <div class="time-control-card">
-                    <div class="time-control-icon">
-                        <i class="fas fa-sign-in-alt"></i>
+            <!-- بطاقة مريم الكعبي -->
+            <div class="employee-card" id="maryamCard">
+                <div class="employee-header">
+                    <div class="employee-info">
+                        <div class="employee-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="employee-details">
+                            <h2>مريم الكعبي</h2>
+                            <p class="employee-id">رقم الموظف: RYD-002</p>
+                        </div>
                     </div>
-                    <h3 class="time-control-title">تسجيل الحضور</h3>
-                    <button class="time-control-btn" onclick="checkIn('maryam')">
-                        <i class="fas fa-clock"></i> تسجيل حضور
-                    </button>
-                    <div class="time-display">
-                        <span>وقت الحضور: </span>
-                        <span class="time-value" id="maryamCheckIn">--:--</span>
+                    <div class="employee-status" id="maryamStatus">
+                        حالة الحضور: غير مسجل
                     </div>
                 </div>
                 
-                <div class="time-control-card">
-                    <div class="time-control-icon">
-                        <i class="fas fa-sign-out-alt"></i>
+                <div class="time-controls">
+                    <!-- تسجيل الحضور -->
+                    <div class="time-control-card">
+                        <div class="time-control-icon">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <h3 class="time-control-title">تسجيل الحضور</h3>
+                        <button class="time-control-btn" onclick="checkIn('maryam')">
+                            <i class="fas fa-clock"></i> تسجيل حضور
+                        </button>
+                        <button class="send-btn" onclick="sendCheckIn('maryam')">
+                            <i class="fab fa-whatsapp"></i> إرسال الحضور للواتساب
+                        </button>
+                        <div class="time-display">
+                            <span>وقت الحضور: </span>
+                            <span class="time-value" id="maryamCheckIn">--:--</span>
+                        </div>
                     </div>
-                    <h3 class="time-control-title">تسجيل الانصراف</h3>
-                    <button class="time-control-btn check-out" onclick="checkOut('maryam')">
-                        <i class="fas fa-clock"></i> تسجيل انصراف
-                    </button>
-                    <div class="time-display">
-                        <span>وقت الانصراف: </span>
-                        <span class="time-value" id="maryamCheckOut">--:--</span>
+                    
+                    <!-- تسجيل الانصراف -->
+                    <div class="time-control-card">
+                        <div class="time-control-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <h3 class="time-control-title">تسجيل الانصراف</h3>
+                        <button class="time-control-btn check-out" onclick="checkOut('maryam')">
+                            <i class="fas fa-clock"></i> تسجيل انصراف
+                        </button>
+                        <button class="send-btn" onclick="sendCheckOut('maryam')">
+                            <i class="fab fa-whatsapp"></i> إرسال الانصراف للواتساب
+                        </button>
+                        <div class="time-display">
+                            <span>وقت الانصراف: </span>
+                            <span class="time-value" id="maryamCheckOut">--:--</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- بطاقة فاطمة الكعبي -->
-        <div class="employee-card" id="fatimaCard">
-            <div class="employee-header">
-                <div class="employee-info">
-                    <div class="employee-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="employee-details">
-                        <h2>فاطمة الكعبي</h2>
-                        <p class="employee-id">رقم الموظف: RYD-003</p>
-                    </div>
-                </div>
-                <div class="employee-status">
-                    <span class="current-date" id="fatimaStatus">حالة الحضور: غير مسجل</span>
                 </div>
             </div>
             
-            <div class="time-controls">
-                <div class="time-control-card">
-                    <div class="time-control-icon">
-                        <i class="fas fa-sign-in-alt"></i>
+            <!-- بطاقة فاطمة الكعبي -->
+            <div class="employee-card" id="fatimaCard">
+                <div class="employee-header">
+                    <div class="employee-info">
+                        <div class="employee-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="employee-details">
+                            <h2>فاطمة الكعبي</h2>
+                            <p class="employee-id">رقم الموظف: RYD-003</p>
+                        </div>
                     </div>
-                    <h3 class="time-control-title">تسجيل الحضور</h3>
-                    <button class="time-control-btn" onclick="checkIn('fatima')">
-                        <i class="fas fa-clock"></i> تسجيل حضور
-                    </button>
-                    <div class="time-display">
-                        <span>وقت الحضور: </span>
-                        <span class="time-value" id="fatimaCheckIn">--:--</span>
+                    <div class="employee-status" id="fatimaStatus">
+                        حالة الحضور: غير مسجل
                     </div>
                 </div>
                 
-                <div class="time-control-card">
-                    <div class="time-control-icon">
-                        <i class="fas fa-sign-out-alt"></i>
+                <div class="time-controls">
+                    <!-- تسجيل الحضور -->
+                    <div class="time-control-card">
+                        <div class="time-control-icon">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <h3 class="time-control-title">تسجيل الحضور</h3>
+                        <button class="time-control-btn" onclick="checkIn('fatima')">
+                            <i class="fas fa-clock"></i> تسجيل حضور
+                        </button>
+                        <button class="send-btn" onclick="sendCheckIn('fatima')">
+                            <i class="fab fa-whatsapp"></i> إرسال الحضور للواتساب
+                        </button>
+                        <div class="time-display">
+                            <span>وقت الحضور: </span>
+                            <span class="time-value" id="fatimaCheckIn">--:--</span>
+                        </div>
                     </div>
-                    <h3 class="time-control-title">تسجيل الانصراف</h3>
-                    <button class="time-control-btn check-out" onclick="checkOut('fatima')">
-                        <i class="fas fa-clock"></i> تسجيل انصراف
-                    </button>
-                    <div class="time-display">
-                        <span>وقت الانصراف: </span>
-                        <span class="time-value" id="fatimaCheckOut">--:--</span>
+                    
+                    <!-- تسجيل الانصراف -->
+                    <div class="time-control-card">
+                        <div class="time-control-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <h3 class="time-control-title">تسجيل الانصراف</h3>
+                        <button class="time-control-btn check-out" onclick="checkOut('fatima')">
+                            <i class="fas fa-clock"></i> تسجيل انصراف
+                        </button>
+                        <button class="send-btn" onclick="sendCheckOut('fatima')">
+                            <i class="fab fa-whatsapp"></i> إرسال الانصراف للواتساب
+                        </button>
+                        <div class="time-display">
+                            <span>وقت الانصراف: </span>
+                            <span class="time-value" id="fatimaCheckOut">--:--</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         
         <!-- جدول السجلات -->
         <section class="records-section">
@@ -787,11 +881,10 @@
                         <tr>
                             <th>#</th>
                             <th>الموظف</th>
-                            <th>حالة الحضور</th>
-                            <th>وقت الحضور</th>
-                            <th>وقت الانصراف</th>
-                            <th>المدة</th>
+                            <th>نوع التسجيل</th>
+                            <th>الوقت</th>
                             <th>التاريخ</th>
+                            <th>حالة الإرسال</th>
                         </tr>
                     </thead>
                     <tbody id="attendanceTableBody">
@@ -803,8 +896,8 @@
         
         <!-- أزرار التحكم العامة -->
         <div class="action-buttons">
-            <button class="action-btn whatsapp-btn" id="whatsappBtn">
-                <i class="fab fa-whatsapp"></i> إرسال إلى واتساب
+            <button class="action-btn whatsapp-btn" onclick="sendDailyReport()">
+                <i class="fab fa-whatsapp"></i> إرسال تقرير يومي
             </button>
             <button class="action-btn clear-btn" onclick="clearAllRecords()">
                 <i class="fas fa-trash-alt"></i> مسح جميع السجلات
@@ -885,17 +978,6 @@
             return date.toLocaleDateString('ar-EG');
         }
         
-        // حساب المدة بين وقتين
-        function calculateDuration(checkIn, checkOut) {
-            if (!checkIn || !checkOut) return '--:--';
-            
-            const diffMs = checkOut - checkIn;
-            const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
-            const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-            
-            return `${diffHrs} ساعة ${diffMins} دقيقة`;
-        }
-        
         // تبديل بين بطاقات الموظفين
         document.querySelectorAll('.employee-tab').forEach(tab => {
             tab.addEventListener('click', function() {
@@ -925,6 +1007,14 @@
             const now = new Date();
             employees[employeeId].checkIn = now;
             
+            // إضافة سجل جديد
+            employees[employeeId].records.push({
+                type: 'حضور',
+                time: now,
+                date: new Date(),
+                sent: false
+            });
+            
             // تحديث العرض
             document.getElementById(`${employeeId}CheckIn`).textContent = formatTime(now);
             document.getElementById(`${employeeId}CheckIn`).classList.add('timestamp');
@@ -941,19 +1031,15 @@
         
         // تسجيل الانصراف
         function checkOut(employeeId) {
-            if (!employees[employeeId].checkIn) {
-                showAlert('يجب تسجيل الحضور أولا قبل تسجيل الانصراف', 'warning');
-                return;
-            }
-            
             const now = new Date();
             employees[employeeId].checkOut = now;
             
             // إضافة سجل جديد
             employees[employeeId].records.push({
-                checkIn: employees[employeeId].checkIn,
-                checkOut: now,
-                date: new Date()
+                type: 'انصراف',
+                time: now,
+                date: new Date(),
+                sent: false
             });
             
             // تحديث العرض
@@ -965,10 +1051,6 @@
             
             // تحديث الجدول
             updateAttendanceTable();
-            
-            // إعادة تعيين الحضور والانصراف للجلسة الحالية
-            employees[employeeId].checkIn = null;
-            employees[employeeId].checkOut = null;
             
             // إظهار رسالة تأكيد
             showAlert(`تم تسجيل انصراف ${getEmployeeArabicName(employeeId)} بنجاح`, 'success');
@@ -988,6 +1070,92 @@
             document.getElementById(`${employeeId}Status`).textContent = status;
         }
         
+        // إرسال حضور عبر واتساب
+        function sendCheckIn(employeeId) {
+            const employee = employees[employeeId];
+            
+            if (!employee.checkIn) {
+                showAlert('يجب تسجيل الحضور أولاً قبل الإرسال', 'warning');
+                return;
+            }
+            
+            let message = `*تسجيل حضور مطعم ريدان للمندي*\n\n`;
+            message += `*الموظف:* ${employee.name}\n`;
+            message += `*نوع التسجيل:* حضور\n`;
+            message += `*وقت الحضور:* ${formatTime(employee.checkIn)}\n`;
+            message += `*التاريخ:* ${formatDate(new Date())}\n\n`;
+            message += `---\nتم إرسال هذا الإشعار تلقائياً من نظام تحضير الموظفين`;
+            
+            // تحديث حالة الإرسال في السجل الأخير
+            const lastRecordIndex = employee.records.length - 1;
+            if (lastRecordIndex >= 0 && employee.records[lastRecordIndex].type === 'حضور') {
+                employee.records[lastRecordIndex].sent = true;
+                employee.records[lastRecordIndex].sentTime = new Date();
+            }
+            
+            sendWhatsAppMessage(message, employeeId, 'حضور');
+        }
+        
+        // إرسال انصراف عبر واتساب
+        function sendCheckOut(employeeId) {
+            const employee = employees[employeeId];
+            
+            if (!employee.checkOut) {
+                showAlert('يجب تسجيل الانصراف أولاً قبل الإرسال', 'warning');
+                return;
+            }
+            
+            let message = `*تسجيل انصراف مطعم ريدان للمندي*\n\n`;
+            message += `*الموظف:* ${employee.name}\n`;
+            message += `*نوع التسجيل:* انصراف\n`;
+            message += `*وقت الانصراف:* ${formatTime(employee.checkOut)}\n`;
+            
+            if (employee.checkIn) {
+                // حساب المدة
+                const duration = calculateDuration(employee.checkIn, employee.checkOut);
+                message += `*وقت الحضور:* ${formatTime(employee.checkIn)}\n`;
+                message += `*مدة العمل:* ${duration}\n`;
+            }
+            
+            message += `*التاريخ:* ${formatDate(new Date())}\n\n`;
+            message += `---\nتم إرسال هذا الإشعار تلقائياً من نظام تحضير الموظفين`;
+            
+            // تحديث حالة الإرسال في السجل الأخير
+            const lastRecordIndex = employee.records.length - 1;
+            if (lastRecordIndex >= 0 && employee.records[lastRecordIndex].type === 'انصراف') {
+                employee.records[lastRecordIndex].sent = true;
+                employee.records[lastRecordIndex].sentTime = new Date();
+            }
+            
+            sendWhatsAppMessage(message, employeeId, 'انصراف');
+        }
+        
+        // حساب المدة بين وقتين
+        function calculateDuration(checkIn, checkOut) {
+            if (!checkIn || !checkOut) return '--:--';
+            
+            const diffMs = checkOut - checkIn;
+            const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            
+            return `${diffHrs} ساعة ${diffMins} دقيقة`;
+        }
+        
+        // إرسال رسالة واتساب
+        function sendWhatsAppMessage(message, employeeId, type) {
+            const phoneNumber = '+971581505066';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // فتح الواتساب في نافذة جديدة
+            window.open(whatsappUrl, '_blank');
+            
+            // تحديث الجدول
+            updateAttendanceTable();
+            
+            showAlert(`تم إرسال ${type} ${getEmployeeArabicName(employeeId)} إلى واتساب`, 'success');
+        }
+        
         // تحديث جدول الحضور
         function updateAttendanceTable() {
             const tableBody = document.getElementById('attendanceTableBody');
@@ -999,27 +1167,15 @@
             for (const employeeId in employees) {
                 const employee = employees[employeeId];
                 
-                // إضافة سجل الجلسة الحالية إذا كان موجوداً
-                if (employee.checkIn) {
-                    allRecords.push({
-                        employeeId: employeeId,
-                        employeeName: employee.name,
-                        checkIn: employee.checkIn,
-                        checkOut: employee.checkOut,
-                        date: new Date(),
-                        isCurrent: true
-                    });
-                }
-                
-                // إضافة جميع السجلات السابقة
                 employee.records.forEach(record => {
                     allRecords.push({
                         employeeId: employeeId,
                         employeeName: employee.name,
-                        checkIn: record.checkIn,
-                        checkOut: record.checkOut,
+                        type: record.type,
+                        time: record.time,
                         date: record.date,
-                        isCurrent: false
+                        sent: record.sent,
+                        sentTime: record.sentTime
                     });
                 });
             }
@@ -1031,31 +1187,22 @@
             allRecords.forEach((record, index) => {
                 const row = document.createElement('tr');
                 
-                // حالة الحضور
-                let status = 'غائب';
-                let statusClass = 'status-absent';
+                // حالة الإرسال
+                let sendStatus = 'لم يتم الإرسال';
+                let sendStatusClass = 'status-absent';
                 
-                if (record.checkIn && record.checkOut) {
-                    status = 'حاضر ومغادر';
-                    statusClass = 'status-present';
-                } else if (record.checkIn) {
-                    status = 'حاضر';
-                    statusClass = 'status-present';
-                }
-                
-                // إذا كان السجل هو الجلسة الحالية
-                if (record.isCurrent) {
-                    row.style.backgroundColor = '#e8f5e9';
+                if (record.sent) {
+                    sendStatus = `تم الإرسال ${record.sentTime ? formatTime(record.sentTime) : ''}`;
+                    sendStatusClass = 'status-present';
                 }
                 
                 row.innerHTML = `
                     <td>${index + 1}</td>
                     <td>${record.employeeName}</td>
-                    <td><span class="${statusClass}">${status}</span></td>
-                    <td>${formatTime(record.checkIn)}</td>
-                    <td>${formatTime(record.checkOut)}</td>
-                    <td>${calculateDuration(record.checkIn, record.checkOut)}</td>
+                    <td><span class="${record.type === 'حضور' ? 'status-present' : 'status-absent'}">${record.type}</span></td>
+                    <td>${formatTime(record.time)}</td>
                     <td>${formatDate(record.date)}</td>
+                    <td><span class="${sendStatusClass}">${sendStatus}</span></td>
                 `;
                 
                 tableBody.appendChild(row);
@@ -1065,13 +1212,47 @@
             if (allRecords.length === 0) {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td colspan="7" style="text-align: center; padding: 40px; color: #666;">
+                    <td colspan="6" style="text-align: center; padding: 40px; color: #666;">
                         <i class="fas fa-clipboard-list" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
                         لا توجد سجلات حضور حتى الآن
                     </td>
                 `;
                 tableBody.appendChild(row);
             }
+        }
+        
+        // إرسال تقرير يومي
+        function sendDailyReport() {
+            let message = `*تقرير يومي - مطعم ريدان للمندي*\n\n`;
+            message += `*التاريخ:* ${formatDate(new Date())}\n`;
+            message += `*الوقت:* ${formatTime(new Date())}\n\n`;
+            message += `*تفاصيل الحضور اليوم:*\n`;
+            
+            let hasRecords = false;
+            
+            for (const employeeId in employees) {
+                const employee = employees[employeeId];
+                const todayRecords = employee.records.filter(record => 
+                    formatDate(record.date) === formatDate(new Date())
+                );
+                
+                if (todayRecords.length > 0) {
+                    hasRecords = true;
+                    message += `\n*${employee.name}:*\n`;
+                    
+                    todayRecords.forEach(record => {
+                        message += `- ${record.type}: ${formatTime(record.time)}\n`;
+                    });
+                }
+            }
+            
+            if (!hasRecords) {
+                message += `\nلا توجد سجلات حضور لهذا اليوم حتى الآن.`;
+            }
+            
+            message += `\n---\nتم إرسال هذا التقرير تلقائياً من نظام تحضير الموظفين`;
+            
+            sendWhatsAppMessage(message, 'all', 'تقرير يومي');
         }
         
         // مسح جميع السجلات
@@ -1122,48 +1303,6 @@
                 }
             }, 3000);
         }
-        
-        // إعداد زر الواتساب
-        document.getElementById('whatsappBtn').addEventListener('click', function() {
-            let message = `*تقرير حضور موظفي مطعم ريدان للمندي*\n`;
-            message += `التاريخ: ${new Date().toLocaleDateString('ar-EG')}\n`;
-            message += `الوقت: ${new Date().toLocaleTimeString('ar-EG')}\n\n`;
-            
-            message += `*تفاصيل الحضور:*\n`;
-            
-            for (const employeeId in employees) {
-                const employee = employees[employeeId];
-                message += `\n*${employee.name}:*\n`;
-                
-                // حالة الجلسة الحالية
-                if (employee.checkIn) {
-                    message += `- الحضور الحالي: ${formatTime(employee.checkIn)}\n`;
-                    message += `- الانصراف الحالي: ${employee.checkOut ? formatTime(employee.checkOut) : 'لم يسجل'}\n`;
-                }
-                
-                // عدد السجلات السابقة
-                if (employee.records.length > 0) {
-                    message += `- عدد مرات الحضور السابقة: ${employee.records.length}\n`;
-                    
-                    // آخر مرة حضر فيها
-                    const lastRecord = employee.records[employee.records.length - 1];
-                    message += `- آخر حضور: ${formatDate(lastRecord.date)} - ${formatTime(lastRecord.checkIn)}\n`;
-                } else {
-                    message += `- لا توجد سجلات حضور سابقة\n`;
-                }
-            }
-            
-            message += `\n---\nتم إرسال هذا التقرير تلقائياً من نظام تحضير الموظفين`;
-            
-            const phoneNumber = '+971581505066';
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            
-            // فتح الواتساب في نافذة جديدة
-            window.open(whatsappUrl, '_blank');
-            
-            showAlert('يتم فتح تطبيق واتساب لإرسال التقرير', 'success');
-        });
         
         // تحديث الجدول عند التحميل
         updateAttendanceTable();
